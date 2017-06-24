@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Try jQuery Online</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="addnewrow.js"></script>
+<script>
+$(document).ready(function() {
+  
+});
+
+function AddNewRow()
+{
+      $('#tbodyPayment').AddNew();
+}
+ function DeleteRow(_this) {
+        debugger;
+        var amount = parseFloat($(_this).closest('tr').find("#idamount").val()).toFixed(2);
+        SubTotal = parseFloat($("#SubTotal").val()).toFixed(2);
+        var diff_value = parseFloat(SubTotal) - parseFloat(amount);
+        $("#SubTotal").val(diff_value);
+
+        $(_this).closest('tr').hide();
+        $(_this).closest('tr').find('[Name$=IsMarkedForDeletetion]').each(function () {
+            $(this).val(true);
+        });
+    }
+</script>
+<style>
+.selected { 
+    color:red; 
+}
+.highlight { 
+    background:yellow; 
+}
+</style>
+</head>
+<body>
+<table class="table table-bordered" id="Idpayment">
+                                                            <thead>
+                                                                <tr>
+                                                                    
+                                                                    <th>Payment Mode</th>
+                                                                    <th>Bank</th>
+                                                                    <th>Branch </th>
+                                                                    <th>Amount</th>
+                                                                    <th>Check/DD No</th>
+                                                                    <th>
+                                                                        Delete
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody id="tbodyPayment">
+                                                                        <tr data-i="0">
+
+                                                                            <td>
+                                                                                <select class="form-control  clspaytype" data-val="true" data-val-number="The field PaymentTypeId must be a number." id="cALPaymentDetailsList_0__PaymentTypeId" name="cALPaymentDetailsList[0].PaymentTypeId"><option value="">--Select--</option>
+<option value="1">Cheque</option>
+<option value="2">DD</option>
+<option value="3">POS</option>
+<option value="4">ECS</option>
+<option value="5">RTGS</option>
+</select>
+                                                                                <input class="isMarkedForDeletetion" data-val="true" data-val-required="The IsMarkedForDeletetion field is required." id="cALPaymentDetailsList_0__IsMarkedForDeletetion" name="cALPaymentDetailsList[0].IsMarkedForDeletetion" type="hidden" value="False">
+                                                                                <input class="isMarkedForDeletetion" data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="cALPaymentDetailsList_0__Id" name="cALPaymentDetailsList[0].Id" type="hidden" value="0">
+                                                                                <input class="isMarkedForDeletetion" id="cALPaymentDetailsList_0__LastChanged" name="cALPaymentDetailsList[0].LastChanged" type="hidden" value="">
+                                                                                <span class="field-validation-valid text-danger" data-valmsg-for="cALPaymentDetailsList[0].PaymentTypeId" data-valmsg-replace="true"></span>
+
+                                                                            </td>
+                                                                            <td>
+                                                                                <input class="form-control clsbank text-box single-line" data-val="true" data-val-regex="Special character should not be entered" data-val-regex-pattern="^[a-zA-Z0-9]+$" id="cALPaymentDetailsList_0__BankName" name="cALPaymentDetailsList[0].BankName" type="text" value="" maxlength="50">
+                                                                                <span class="field-validation-valid text-danger" data-valmsg-for="cALPaymentDetailsList[0].BankName" data-valmsg-replace="true"></span>
+
+                                                                            
+                                                                            </td>
+                                                                            <td>
+
+                                                                                <input class="form-control clsbranch text-box single-line" data-val="true" data-val-regex="Special character should not be entered" data-val-regex-pattern="^[a-zA-Z0-9]+$" id="cALPaymentDetailsList_0__BranchName" name="cALPaymentDetailsList[0].BranchName" type="text" value="" maxlength="50">
+                                                                                <span class="field-validation-valid text-danger" data-valmsg-for="cALPaymentDetailsList[0].BranchName" data-valmsg-replace="true"></span>
+
+                                                                            
+                                                                            </td>
+                                                                            <td>
+
+                                                                                <input class="form-control clcamount isNumber text-box single-line" data-val="true" data-val-number="The field Amount must be a number." data-val-regex="Special character should not be entered" data-val-regex-pattern="^[a-zA-Z0-9]+$" id="idamount" name="cALPaymentDetailsList[0].Amount" style="float: right;text-align:right;" type="text" value="" maxlength="10">
+                                                                                <span class="field-validation-valid text-danger" data-valmsg-for="cALPaymentDetailsList[0].Amount" data-valmsg-replace="true"></span>
+
+                                                                            
+                                                                            </td>
+                                                                            <td>
+                                                                                <input class="form-control clccheck text-box single-line" data-val="true" data-val-regex="Special character should not be entered" data-val-regex-pattern="^[a-zA-Z0-9]+$" id="cALPaymentDetailsList_0__ChequeNo" name="cALPaymentDetailsList[0].ChequeNo" type="text" value="" maxlength="50">
+                                                                                <span class="field-validation-valid text-danger" data-valmsg-for="cALPaymentDetailsList[0].ChequeNo" data-valmsg-replace="true"></span>                                                                          
+                                                                            </td>
+                                                                            <td>
+
+                                                                                <a href="javascript:void(0);" onclick="DeleteRow(this)" class="btn btn-sm btn-danger btn-xs">X</a>
+                                                                            </td>
+                                                                        </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div>
+                                                                            <div class="btn-group pull-right" role="group">
+                                                                                <a href="javascript:void(0);" class="btn btn-info pull-left clsadd btn-xs" id="btnadd" onclick="AddNewRow()"><span class="glyphicon glyphicon-plus"></span> Add New Row</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+</body>
+</html>
